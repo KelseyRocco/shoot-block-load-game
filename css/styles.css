@@ -1,0 +1,57 @@
+.jumbotron p {
+    font-size: 16px;
+}
+
+
+#gameBoard {
+    display: flex;
+    justify-content: space-around;
+}
+
+.game {
+    border: 5px solid black;
+    margin: auto 0;
+    height: 300px;
+    width: 30%;
+}
+
+/* BUTTONS */
+/*.controls {
+    float: left;
+}
+
+
+.button
+/*.button {
+    display: block;
+    background-color: lightblue;
+    width: 100px;
+    margin: 20px;
+}
+*/
+.controls {
+    margin-left: 170px;
+}
+.button {
+    background-color: lightblue;
+    width: 100px;
+    margin: 15px;
+    text-align: center;
+}
+
+/*SCORE/BULLETS SECTION*/
+.score {
+    display: flex;
+    justify-content: space-around;
+    font-size: 30px;
+    font-weight: bolder;
+    line-height: 20px;
+}
+
+
+/*FOOTER*/
+footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 20px;
+}
