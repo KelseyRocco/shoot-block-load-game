@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!--  FONT AWESOME  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
@@ -17,31 +22,57 @@
 </head>
 <body>
     <!---Jumbotron--->
-    <header>
-        <h1>Shoot, Block, Load</h1>
-    </header>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container text-center">
+            <h1 class="display-4">Load, Block, Shoot</h1>
+            <p>Win the game by shooting your opponent first!</p>
+        </div>
+    </div>
     
     <!---Game Play--->
     <section id="gameBoard">
 
-        <div id="leftBoard">
-
+        <div class=" game human">
+            <div class="icon">
+            </div>
+            <div class="choice">
+                <h1></h1>
+            </div>
         </div>
 
-        <p>vs</p>
-
-        <div id="rightBoard">
-
+        <div class="game comp">
+            <div class="icon">
+            </div>
+            <div class="choice">
+                <h1></h1>
+            </div>
         </div>
+    </section>
+    
+<!---Button controls for human player--->
+<section class="controls">
+    <button class="button load">LOAD</button>
+    <button class="button block">BLOCK</button>
+    <button class="button shoot">SHOOT</button>
+    
+</section>
 
-    <!---Button controls for human player--->
-    <button>Shoot</button>
-    <button>Block</button>
-    <button>Load</button>
+<!-- SCORE -->
+<section class="score">
+    <div class="humanScore">
+        <p class="humanNumBullets">Bullets:</p>
+        <p class="humanScore">Score:</p>
+    </div>
+
+    <div class ="compScore">
+        <p class="compNumBullets">Bullets:</p>
+        <p class="compScore">Score:</p>
+    </div>
+</section>
+
 
     <!---Footer/Instructions--->
     <footer>
-        <p>Win the game by shooting your opponent first!</p>
         <p>You need at least <strong>one</strong> bullet to shoot and can only win if you shoot your gun while your opponent is loading theirs.</p>
         <p>Blocking protects you from bullets!</p>
     </footer>    
