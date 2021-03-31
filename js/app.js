@@ -75,3 +75,35 @@ make a function that calls on the object human or pc and sayd "if object" makes 
  * 
  * 
  */
+
+//Game Variables
+let computerScore = 0;
+let computerBullets = 0;
+let humanScore = 0;
+let humanBullets = 0;
+const choices = ["shoot", "load", "block"];
+
+const displayMsg = (message) => alert(message);
+
+const gameInit
+
+
+
+
+var game = {
+    human = {
+        bullets: 0,
+        score: 0,
+        choice: null 
+    },
+    computer = {
+        bullets: 0,
+        score: 0,
+        choice: null 
+    }
+};
+
+function play(player) {
+    playerChoice === "shoot"
+
+}
