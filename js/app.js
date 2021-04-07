@@ -79,7 +79,7 @@ make a function that calls on the object human or pc and sayd "if object" makes 
 $(document).ready(function(){
 
     
-
+    //GAME VARIABLES
     let game = {
         user: {
             score:0,
@@ -94,13 +94,8 @@ $(document).ready(function(){
         choices: ["block", "load", "shoot"]
     };
     
-
-    //Game Variables
     let compTurn = false;
 
-
-
-    //const displayMsg = (message) => alert(message);
 
     function updateBulletsEl(value){
         if (compTurn){
@@ -110,6 +105,16 @@ $(document).ready(function(){
 
         }
     }
+
+
+    function updateScoreEl(value){
+        if(compTurn){
+            $("#compScore").html(value)
+        } else {
+            $("#userScore").html(value)
+        };
+    };
+
 
 
     //DOM events
@@ -168,7 +173,7 @@ $(document).ready(function(){
         
     };
 
-   //make sure it chooses randomChoice - diff action every time
+    //COMPUTERS CHOICE
     function randomChoice (){
         let randomChoice
         if (game.comp.bullets === 0){
@@ -176,23 +181,15 @@ $(document).ready(function(){
         } else {
             randomChoice = game.choices[Math.floor(Math.random()*game.choices.length)]
         };
-        //check if choice is allowed - what makes a good choice 
-        // if(player.bullets === 0){
-        //     randomChoice !== "shoot"
-        // };
+        ;
         console.log(randomChoice);
-        //if choice is good, return randomChoice, if bad - do another randomChoice and check again
-            return randomChoice
-            
+        return randomChoice
         
     };
 
-
+    //COMPUTERS TURN
     function takeCompTurn(randomChoice){
         if(compTurn){
-            //randomly pick one option from game.choices
-            //save random choice in variable
-            //create conditional that will check choice and run corresponding function
             if (randomChoice === "shoot"){
                 shootGun();
             } else if (randomChoice === "load"){
@@ -207,16 +204,8 @@ $(document).ready(function(){
 
     };
 
-    //after user turn clicks, then swtich to comp
-
-
-
-
     
-    //Initial state of game
-
-
-    
+    //INITIAL STATE OF GAME
     function initGame() {
         game = {
             user: {
