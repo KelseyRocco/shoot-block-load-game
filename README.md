@@ -1,5 +1,5 @@
 # Initial WireFrame of game:
-![Wireframe of Project One](/img/wireframeProjectOne.jpg)
+![Wireframe of Project One](/assets/wireframeProjectOne.jpg)
 
 ---
 ## How To Play
