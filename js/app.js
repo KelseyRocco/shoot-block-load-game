@@ -13,7 +13,7 @@
  * 
  * 
  * 
- * (PLAYER ONE HUMAN)
+ * (PLAYER ONE)
  * if (playerOne === "load") && (playerTwo === "load" || "block") {
  *      playerOne loads 1 bullet
  *      bullet + 1
@@ -76,34 +76,169 @@ make a function that calls on the object human or pc and sayd "if object" makes 
  * 
  */
 
-//Game Variables
-let computerScore = 0;
-let computerBullets = 0;
-let humanScore = 0;
-let humanBullets = 0;
-const choices = ["shoot", "load", "block"];
+$(document).ready(function(){
 
-const displayMsg = (message) => alert(message);
+    
 
-const gameInit
+    let game = {
+        user: {
+            score:0,
+            bullets:0,
+            choice:null
+        },
+        comp: {
+            score:0,
+            bullets:0,
+            choice:null
+        },
+        choices: ["block", "load", "shoot"]
+    };
+    
+
+    //Game Variables
+    let compTurn = false;
 
 
 
+    //const displayMsg = (message) => alert(message);
 
-var game = {
-    human = {
-        bullets: 0,
-        score: 0,
-        choice: null 
-    },
-    computer = {
-        bullets: 0,
-        score: 0,
-        choice: null 
+    function updateBulletsEl(value){
+        if (compTurn){
+            $("#compNumBullets").html(value)    
+        } else {
+            $("#userBullets").html(value)
+
+        }
     }
-};
 
-function play(player) {
-    playerChoice === "shoot"
 
-}
+    //DOM events
+
+    $("#load").click(function(evt){
+        loadGun();
+        compTurn = true;
+        takeCompTurn(randomChoice());
+    });
+
+
+    function loadGun () {
+        const player = game[userType()];
+        player.bullets +=1;
+        player.choice="load";
+        console.log(game);
+        updateBulletsEl(player.bullets);
+    }
+
+
+    $("#shoot").click(function(evt){
+        shootGun();
+        compTurn = true;
+        takeCompTurn(randomChoice());
+    });
+
+
+    function shootGun () {
+        const player = game[userType()];
+        player.bullets -=1;
+        player.choice="shoot";
+        console.log(game);
+        updateBulletsEl(player.bullets);
+    }
+
+
+    $("#block").click(function(evt){
+        blockGun();
+        compTurn = true;
+        takeCompTurn(randomChoice());
+        console.log(game);
+    });
+
+    function blockGun () {
+        const player = game[userType()];
+        player.choice="block";
+    };
+
+
+    function userType(){
+        if(compTurn){
+            return "comp"
+        } else {
+            return "user"
+        };
+        
+    };
+
+   //make sure it chooses randomChoice - diff action every time
+    function randomChoice (){
+        let randomChoice
+        if (game.comp.bullets === 0){
+            randomChoice = game.choices[Math.floor(Math.random()*2)]
+        } else {
+            randomChoice = game.choices[Math.floor(Math.random()*game.choices.length)]
+        };
+        //check if choice is allowed - what makes a good choice 
+        // if(player.bullets === 0){
+        //     randomChoice !== "shoot"
+        // };
+        console.log(randomChoice);
+        //if choice is good, return randomChoice, if bad - do another randomChoice and check again
+            return randomChoice
+            
+        
+    };
+
+
+    function takeCompTurn(randomChoice){
+        if(compTurn){
+            //randomly pick one option from game.choices
+            //save random choice in variable
+            //create conditional that will check choice and run corresponding function
+            if (randomChoice === "shoot"){
+                shootGun();
+            } else if (randomChoice === "load"){
+                loadGun();
+            } else {
+                blockGun();
+            }
+
+            compTurn = false
+        }
+
+
+    };
+
+    //after user turn clicks, then swtich to comp
+
+
+
+
+    
+    //Initial state of game
+
+
+    
+    function initGame() {
+        game = {
+            user: {
+                score:0,
+                bullets:0,
+                choice:null
+            },
+            comp: {
+                score:0,
+                bullets:0,
+                choice:null
+            },
+            choices: ["block", "load", "shoot"]
+        };
+
+    
+
+       // $("#compScore, #compBullets, #userScore, userBullets").empty();
+
+    };
+
+
+    initGame();
+});
+

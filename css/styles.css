@@ -15,20 +15,13 @@
     width: 30%;
 }
 
-/* BUTTONS */
-/*.controls {
-    float: left;
+img {
+    height: 200px;
+    width: 200px;
+    margin: 50px 115px;
 }
 
 
-.button
-/*.button {
-    display: block;
-    background-color: lightblue;
-    width: 100px;
-    margin: 20px;
-}
-*/
 .controls {
     margin-left: 170px;
 }
@@ -40,6 +33,7 @@
 }
 
 /*SCORE/BULLETS SECTION*/
+
 .score {
     display: flex;
     justify-content: space-around;
