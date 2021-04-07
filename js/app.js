@@ -107,16 +107,6 @@ $(document).ready(function(){
     }
 
 
-    function updateScoreEl(value){
-        if(compTurn){
-            $("#compScore").html(value)
-        } else {
-            $("#userScore").html(value)
-        };
-    };
-
-
-
     //DOM events
 
     $("#load").click(function(evt){
@@ -130,6 +120,7 @@ $(document).ready(function(){
         const player = game[userType()];
         player.bullets +=1;
         player.choice="load";
+        enableShoot();
         console.log(game);
         updateBulletsEl(player.bullets);
     }
@@ -146,6 +137,7 @@ $(document).ready(function(){
         const player = game[userType()];
         player.bullets -=1;
         player.choice="shoot";
+        enableShoot();
         console.log(game);
         updateBulletsEl(player.bullets);
     }
@@ -161,6 +153,16 @@ $(document).ready(function(){
     function blockGun () {
         const player = game[userType()];
         player.choice="block";
+        enableShoot();
+    };
+
+    //DISABLES AND ENABLES SHOOT BUTTON DEPENDING ON # OF BULLETS
+    function enableShoot() {
+        if(game.user.bullets > 0){
+            shoot.removeAttribute("disabled");
+        } else if (game.user.bullets === 0){
+            shoot.setAttribute("disabled", "disabled");
+        }
     };
 
 
