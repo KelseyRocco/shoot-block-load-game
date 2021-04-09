@@ -1,81 +1,3 @@
-/**
- * Step One Init Game
- * ---> player one and player two will both have blank playing fields
- * ---> var score = 0;
- * ---> var bullet = 0;
- * ---> playerOne and playerTwo screens = blank
- * ---> <button>Shoot<button> disabled for playerOne, as they have no bullets
- *      if(playerOne Bullets > 0){
- *      button on} else {button off}
- * 
- * Step Two
- * ---> playerOne (human) will choose between the options to "shoot", "load", or "block"
- * 
- * 
- * 
- * (PLAYER ONE)
- * if (playerOne === "load") && (playerTwo === "load" || "block") {
- *      playerOne loads 1 bullet
- *      bullet + 1
- * } else {
- *      playerOne loses (as they were loading and playerTwo shot)
- *      displayMsg("You've been shot")
- * }
- * 
- * if (playerOne === "shoot") && (playerTwo === "shoot" || "block") {
- *      playerOne loses 1 bullet 
- *      bullet - 1
- * } else {
- *      playerOne wins (as they shot while playerTwo was loading)
- *      displayMsg("You shot your opponent!")
- *      score + 1
- *      if (score === 5){
- *          displayMsg("You won!!!") 
- *          and end game
- *      } 
- * }
- * 
- 
- * 
- * PLAYER TWO (COMPUTER)
- *  if (playerTwo === "load") && (playerOne === "load" || "block") {
- *      playerTwo loads 1 bullet
- *      bullet + 1
- * } else {
- *      playerTwo loses (as they were loading and playerOne shot)
- * }
- * 
- * if (playerTwo === "shoot") && (playerOne === "shoot" || "block") {
- *      playerTwo loses 1 bullet 
- *      bullet - 1
- * } else {
- *      playerTwo wins (as they shot while playerOne was loading)
- *      score + 1
- *      if (score === 5){
- *          displayMsg("Player Two has won the game!!!")
- *  }
- * }
- * 
- 
-^^^ instead of doing that, make game object two keys - human and pc objects with two keys - score and bullet
-
-make a function that calls on the object human or pc and sayd "if object" makes this choice, this happens - vs all this pseudo code
- * 
- * 
- * 
- * 
- * When either player loads without getting shot, their bullet count will increase by one
- * var bullet = 0 + 1 - button only available for playerOne when they have at least one bullet (otherwise will be disabled)
- * 
- * When either player shoots while other is loading, the shooter wins the round
- * var score = 0 + 1
- * 
- * Which ever player reaches 5 points first wins the game
- * score = 5
- * 
- * 
- */
-
 $(document).ready(function(){
 
     
@@ -99,12 +21,32 @@ $(document).ready(function(){
 
     function updateBulletsEl(value){
         if (compTurn){
-            $("#compNumBullets").html(value)    
+            $("#compBullets").html(value)    
         } else {
             $("#userBullets").html(value)
 
         }
-    }
+    };
+
+    function updateScoreEl(value){
+        if(compTurn){
+            $("#compScore").html(value)
+        } else {
+            $("#userScore").html(value)
+        }
+    };
+
+    const shootImage = document.createElement('img')
+    shootImage.src="assets/shootingGun.jpg"
+
+    const loadImage = document.createElement('img')
+    loadImage.src="assets/loadingBullets.jpg"
+
+    const blockImage = document.createElement('img')
+    blockImage.src="assets/blockingShield.jpg"
+
+
+
 
 
     //DOM events
@@ -120,9 +62,13 @@ $(document).ready(function(){
         const player = game[userType()];
         player.bullets +=1;
         player.choice="load";
+        getPoint();
         enableShoot();
         console.log(game);
         updateBulletsEl(player.bullets);
+        updateScoreEl(player.score);
+        document.querySelector('.userIcon').appendChild(loadImage);
+        
     }
 
 
@@ -137,9 +83,12 @@ $(document).ready(function(){
         const player = game[userType()];
         player.bullets -=1;
         player.choice="shoot";
+        getPoint();
         enableShoot();
         console.log(game);
         updateBulletsEl(player.bullets);
+        updateScoreEl(player.score);
+        document.querySelector('.userIcon').appendChild(shootImage);
     }
 
 
@@ -153,7 +102,11 @@ $(document).ready(function(){
     function blockGun () {
         const player = game[userType()];
         player.choice="block";
+        getPoint();
         enableShoot();
+        updateScoreEl(player.score);
+        document.querySelector('.userIcon').appendChild(blockImage);
+        
     };
 
     //DISABLES AND ENABLES SHOOT BUTTON DEPENDING ON # OF BULLETS
@@ -175,6 +128,20 @@ $(document).ready(function(){
         
     };
 
+    //GIVES POINT TO PLAYER THAT SHOOTS WHILE OTHER PLAYER IS LOADING
+    function getPoint() {
+        const player = game[userType()];
+
+        if (game.user.choice === "shoot" && game.comp.choice === "load"){
+            game.user.score += 1;
+        } else if (game.user.choice === "load" && game.comp.choice === "shoot"){
+            game.comp.score += 1;
+        } else {
+            return player.score
+        }
+    };
+
+
     //COMPUTERS CHOICE
     function randomChoice (){
         let randomChoice
@@ -184,7 +151,7 @@ $(document).ready(function(){
             randomChoice = game.choices[Math.floor(Math.random()*game.choices.length)]
         };
         ;
-        console.log(randomChoice);
+        console.log(randomChoice);//get rid of console.log
         return randomChoice
         
     };
@@ -194,10 +161,13 @@ $(document).ready(function(){
         if(compTurn){
             if (randomChoice === "shoot"){
                 shootGun();
+                document.querySelector('.compIcon').appendChild(shootImage);
             } else if (randomChoice === "load"){
                 loadGun();
+                document.querySelector('.compIcon').appendChild(loadImage);
             } else {
                 blockGun();
+                document.querySelector('.compIcon').appendChild(blockImage);
             }
 
             compTurn = false
