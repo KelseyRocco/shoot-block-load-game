@@ -1,5 +1,6 @@
 
 ![Landing Page of Game](/assets/finalGameScreen.jpg)
+https://kelseyrocco.github.io/shoot-block-load-game/
 # **How To Play Load, Block, Shoot**
 You have three options to choose from:
 <br><br>
