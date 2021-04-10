@@ -1,18 +1,15 @@
+body {
+    background-color: #b3ffff;
+}
 .jumbotron p {
     font-size: 16px;
 }
 
 
+
 #gameBoard {
     display: flex;
     justify-content: space-around;
-}
-
-.game {
-    border: 5px solid black;
-    margin: auto 0;
-    height: 300px;
-    width: 30%;
 }
 
 img {
@@ -42,6 +39,9 @@ img {
     line-height: 20px;
 }
 
+input {
+    border: none;
+}
 
 /*FOOTER*/
 footer {

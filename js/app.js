@@ -36,18 +36,11 @@ $(document).ready(function(){
         }
     };
 
-    const shootImage = document.createElement('img')
-    shootImage.src="assets/shootingGun.jpg"
+    const shootImage = "assets/shootingGun.jpg";
 
-    const loadImage = document.createElement('img')
-    loadImage.src="assets/loadingBullets.jpg"
+    const loadImage ="assets/loadingBullets.jpg";
 
-    const blockImage = document.createElement('img')
-    blockImage.src="assets/blockingShield.jpg"
-
-
-
-
+    const blockImage = "assets/blockingShield.jpg";
 
     //DOM events
 
@@ -64,11 +57,11 @@ $(document).ready(function(){
         player.choice="load";
         getPoint();
         enableShoot();
-        console.log(game);
         updateBulletsEl(player.bullets);
         updateScoreEl(player.score);
-        document.querySelector('.userIcon').appendChild(loadImage);
-        
+        const iconClass = compTurn ? '.compIcon' : '.userIcon';
+        $(iconClass).attr('src', loadImage)
+        winnerDeclaredReset();
     }
 
 
@@ -85,10 +78,11 @@ $(document).ready(function(){
         player.choice="shoot";
         getPoint();
         enableShoot();
-        console.log(game);
         updateBulletsEl(player.bullets);
         updateScoreEl(player.score);
-        document.querySelector('.userIcon').appendChild(shootImage);
+        const iconClass = compTurn ? '.compIcon' : '.userIcon';
+        $(iconClass).attr('src', shootImage);
+        winnerDeclaredReset();
     }
 
 
@@ -96,7 +90,6 @@ $(document).ready(function(){
         blockGun();
         compTurn = true;
         takeCompTurn(randomChoice());
-        console.log(game);
     });
 
     function blockGun () {
@@ -105,11 +98,13 @@ $(document).ready(function(){
         getPoint();
         enableShoot();
         updateScoreEl(player.score);
-        document.querySelector('.userIcon').appendChild(blockImage);
-        
+        const iconClass = compTurn ? '.compIcon' : '.userIcon';
+        $(iconClass).attr('src', blockImage);
+        winnerDeclaredReset();
     };
 
-    //DISABLES AND ENABLES SHOOT BUTTON DEPENDING ON # OF BULLETS
+    /* ------------------------------------------------------*/
+
     function enableShoot() {
         if(game.user.bullets > 0){
             shoot.removeAttribute("disabled");
@@ -128,7 +123,7 @@ $(document).ready(function(){
         
     };
 
-    //GIVES POINT TO PLAYER THAT SHOOTS WHILE OTHER PLAYER IS LOADING
+
     function getPoint() {
         const player = game[userType()];
 
@@ -151,29 +146,33 @@ $(document).ready(function(){
             randomChoice = game.choices[Math.floor(Math.random()*game.choices.length)]
         };
         ;
-        console.log(randomChoice);//get rid of console.log
         return randomChoice
         
     };
 
-    //COMPUTERS TURN
+
     function takeCompTurn(randomChoice){
-        if(compTurn){
+        if(compTurn){    
             if (randomChoice === "shoot"){
                 shootGun();
-                document.querySelector('.compIcon').appendChild(shootImage);
             } else if (randomChoice === "load"){
                 loadGun();
-                document.querySelector('.compIcon').appendChild(loadImage);
             } else {
                 blockGun();
-                document.querySelector('.compIcon').appendChild(blockImage);
             }
-
             compTurn = false
         }
+    };
 
 
+    function winnerDeclaredReset(){
+        if(game.user.score > 5){
+            alert("You won the game!");
+            initGame();            
+        } else if(game.comp.score > 5){
+            alert("You lost!");
+            initGAme();
+        }
     };
 
     
@@ -192,6 +191,8 @@ $(document).ready(function(){
             },
             choices: ["block", "load", "shoot"]
         };
+
+    
 
     
 
