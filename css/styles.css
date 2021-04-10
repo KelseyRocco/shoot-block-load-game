@@ -1,11 +1,6 @@
-body {
-    background-color: #b3ffff;
-}
 .jumbotron p {
     font-size: 16px;
 }
-
-
 
 #gameBoard {
     display: flex;

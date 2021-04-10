@@ -18,6 +18,7 @@ $(document).ready(function(){
     
     let compTurn = false;
 
+    //UPDATE HTML ELEMENTS
 
     function updateBulletsEl(value){
         if (compTurn){
@@ -42,6 +43,7 @@ $(document).ready(function(){
 
     const blockImage = "assets/blockingShield.jpg";
 
+
     //DOM events
 
     $("#load").click(function(evt){
@@ -49,6 +51,7 @@ $(document).ready(function(){
         compTurn = true;
         takeCompTurn(randomChoice());
     });
+
 
 
     function loadGun () {
@@ -103,7 +106,7 @@ $(document).ready(function(){
         winnerDeclaredReset();
     };
 
-    /* ------------------------------------------------------*/
+    //FUNCTIONS
 
     function enableShoot() {
         if(game.user.bullets > 0){
@@ -137,7 +140,7 @@ $(document).ready(function(){
     };
 
 
-    //COMPUTERS CHOICE
+    //computer choice
     function randomChoice (){
         let randomChoice
         if (game.comp.bullets === 0){
@@ -191,13 +194,6 @@ $(document).ready(function(){
             },
             choices: ["block", "load", "shoot"]
         };
-
-    
-
-    
-
-       // $("#compScore, #compBullets, #userScore, userBullets").empty();
-
     };
 
 
